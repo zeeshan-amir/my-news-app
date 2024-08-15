@@ -12,8 +12,6 @@
     "moduleResolution": "node",
     "types": ["@testing-library/jest-dom", "jest"],
     "lib": ["dom", "es2020"],
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
   },
   "references": [
     { "path": "./tsconfig.app.json" },

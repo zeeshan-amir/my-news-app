@@ -59,6 +59,7 @@ const useCategories = (
 
   const handleSourcesChange = (selectedOptions: MultiValue<Option> | null) => {
     setSources(selectedOptions as Option[]);
+    setCategories({} as Option)
   };
 
   const handleCategoriesChange = (selectedOption: SingleValue<Option> | null) => {

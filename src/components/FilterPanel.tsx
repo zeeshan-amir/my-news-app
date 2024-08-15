@@ -33,14 +33,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({onFilter}) => {
     handleCategoriesChange,
   } = useCategories(savedPreferences?.sources as Option[], savedPreferences?.categories as Option);
 
-  useEffect(() => {
-    if (savedPreferences?.categories)
-      handleCategoriesChange(
-        savedPreferences.categories as SingleValue<Option>
-      );
-    if (savedPreferences?.sources)
-      handleSourcesChange(savedPreferences.sources as MultiValue<Option>);
-  }, []);
 
   const handleFilter = () => {
     onFilter({
@@ -70,7 +62,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({onFilter}) => {
       />
       <CustomSelect
         options={availableCategories}
-        value={categories}
+        value={categories?.label ? categories : null}
         onChange={selectedOption =>
           handleCategoriesChange(selectedOption as SingleValue<Option> | null)
         }

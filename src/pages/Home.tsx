@@ -6,7 +6,7 @@ import {FetchArticlesParams, Article, ConfigurationState} from '../types';
 import NewsApiService from '../services/NewsApiService';
 import GurdianApiService from '../services/GurdianApiService';
 import NYTimesService from '../services/NYTimesService';
-import useDebounce from '../hooks/useDounce';
+import useDebounce from '../hooks/useDebounce';
 import spinnerSvc from '../utils/loader-service';
 import preferencesStorageService from '../services/localStorage';
 import useCategories from '../hooks/useCategories';

@@ -40,7 +40,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({onFilter}) => {
       );
     if (savedPreferences?.sources)
       handleSourcesChange(savedPreferences.sources as MultiValue<Option>);
-  }, [savedPreferences]);
+  }, []);
 
   const handleFilter = () => {
     onFilter({

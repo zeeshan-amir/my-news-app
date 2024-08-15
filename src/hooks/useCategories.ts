@@ -12,13 +12,9 @@ const useCategories = (
   initialCategory: SingleValue<Option> | null = null
 ) => {
   const [sources, setSources] = useState<MultiValue<Option>>(initialSources);
-  const [categories, setCategories] = useState<SingleValue<Option> | null>(
-    initialCategory
-  );
+  const [categories, setCategories] = useState<SingleValue<Option> | null>(initialCategory);
   const [availableCategories, setAvailableCategories] = useState<Option[]>([]);
-  const [sourceToCategoriesMap, setSourceToCategoriesMap] = useState<
-    Record<SourceKey, Option[]>
-  >({
+  const [sourceToCategoriesMap, setSourceToCategoriesMap] = useState<Record<SourceKey, Option[]>>({
     'The-News-Api': newsApiSelectOptions,
     'New-York-Api': newYorkselectOptions,
     'Gurdian-Api': [],
@@ -28,7 +24,6 @@ const useCategories = (
     try {
       spinnerSvc.start();
       const res = await GurdianApiService.fetchGuardianTags();
-      console.log('res', res);
       setSourceToCategoriesMap(prevMap => ({
         ...prevMap,
         'Gurdian-Api': res,
@@ -42,28 +37,31 @@ const useCategories = (
 
   useEffect(() => {
     fetchGurdianCategories();
-  }, []);
+  }, []); 
 
   useEffect(() => {
-    const selectedSource = sources?.map(x => x.value) as SourceKey[];
+    const selectedSource = sources.map(x => x.value) as SourceKey[];
     const options = selectedSource.map(x => sourceToCategoriesMap[x] || []);
-    setAvailableCategories(options.flatMap(x => x));
+    const newAvailableCategories = options.flatMap(x => x);
+    
+    if (newAvailableCategories !== availableCategories) {
+      setAvailableCategories(newAvailableCategories);
+    }
 
-    const included = options
-      .flatMap(x => x)
-      .find(
-        y => y.label === categories?.label && y.value === categories?.value
-      );
-    setCategories(included || null);
-  }, [sources, sourceToCategoriesMap, categories]);
+    const included = newAvailableCategories.find(
+      y => y.label === categories?.label && y.value === categories?.value
+    );
+
+    if (included && categories !== included) {
+      setCategories(included);
+    }
+  }, [sources, sourceToCategoriesMap]); 
 
   const handleSourcesChange = (selectedOptions: MultiValue<Option> | null) => {
     setSources(selectedOptions as Option[]);
   };
 
-  const handleCategoriesChange = (
-    selectedOption: SingleValue<Option> | null
-  ) => {
+  const handleCategoriesChange = (selectedOption: SingleValue<Option> | null) => {
     setCategories(selectedOption as Option);
   };
 

@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+# News Aggregator Application Using React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an implementation of a News Aggregator application using Reactjs (Typescript). This is the only front End Application where we have integrated it with 3 Open News api sources.
 
-Currently, two official plugins are available:
+## APi Sources
+  Following API sources for the news are being used.
+  
+  - News Api (https://newsapi.org/)
+  - Guardian Api (https://open-platform.theguardian.com/documentation/)
+  - NewYork Api (https://developer.nytimes.com/docs/articlesearch-product/1/overview)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirements
+  - You should have a docker installed on your system.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Searching**: Searching based on anything matched with the news article .
+- **Filtering**: Filteration of News based on news source, category and date.
+- **Pages**
+    - Home Page
+    - Preference Page (User can set preferences to be shown on Home Page when save)
+- **Github Actions**: Eslint & Testing workflow is added.
+- **Containerization**: Application is dockerized.
 
-- Configure the top-level `parserOptions` property like this:
+## Demo
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Here is the screenshots demonstrating the application's functionality:
+![alt text](image.png)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Local Setup Guidelines
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/zeeshan-amir/my-news-app.git
+   cd my-news-app
+   ```
+
+2. Install dependencies & run the app:
+   ```bash
+   docker build -t my-news-app .
+   ```
+
+3. If you don't have a docker installed 
+   ```bash
+    npm install
+    npm run dev
+   ```
+
+## Test Cases
+
+Test cases react are added and ran before the build.
+  ```bash
+  npm test
+  ```
+
+## Note
+
+  - NewsApi is being used with fetch instead of axios due to some CORS policy issues.
+  - Pagination can be added for further improvements.
+
+## Conclusion
+
+This README provides all necessary information to get the project set up locally, run tests.

@@ -16,7 +16,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({article}) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <img src="./public/assets/no-image-found.svg" alt="No Image found" />
+          <img src="./assets/no-image-found.svg" alt="No Image found" />
         )}
       </div>
       <div className="flex flex-col justify-between p-4 flex-grow">

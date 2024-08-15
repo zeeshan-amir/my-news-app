@@ -9,7 +9,11 @@ class GuardianApiService extends ApiService {
 
   async fetchArticles(params: FetchArticlesParams = {}) {
     const {keyword = 'debates'} = params;
-    const endpoint = `/search?q=${keyword}${params?.category ? `&tag=${params.category.value}` : ''}&from-date=${params.fromDate}&api-key=${GUARDIAN_API_KEY}`;
+    const endpoint = `/search?q=${keyword}${
+      params?.category ? `&tag=${params.category.value}` : ''
+    }${params?.fromDate!=='' ? `&from-date=${params.fromDate}` : ''
+    }&api-key=${GUARDIAN_API_KEY}`;
+
     const response = await this.get<{response: {results: any[]}}>(endpoint);
     return response.response.results.map((article: any) => ({
       title: article.webTitle,

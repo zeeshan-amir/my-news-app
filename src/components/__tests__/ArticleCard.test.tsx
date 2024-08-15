@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ArticleCard from '../ArticleCard';
@@ -49,7 +50,7 @@ describe('ArticleCard Component', () => {
     expect(descriptionElement).toBeInTheDocument();
     expect(sourceElement).toBeInTheDocument();
     expect(imageElement).toBeInTheDocument();
-    expect(imageElement).toHaveAttribute('src', './public/assets/no-image-found.svg');
+    expect(imageElement).toHaveAttribute('src', './assets/no-image-found.svg');
   });
 
   test('renders correct link', () => {

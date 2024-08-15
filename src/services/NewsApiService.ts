@@ -5,12 +5,14 @@ class NewsApiService {
   async fetchFromNewsAPI(params: FetchArticlesParams = {}) {
     const {keyword = 'tesla', fromDate = '', toDate = '', category} = params;
     const endpoint =
-      `https://newsapi.org/v2/top-headlines?q=${keyword}` +
-      (fromDate ? `&from=${fromDate}` : '') +
-      (toDate ? `&to=${toDate}` : '') +
-      (category?.value ? `&category=${category?.value}` : '') +
-      '&country=us' +
-      `&apiKey=${NEWS_API_KEY}`;
+    `https://newsapi.org/v2/top-headlines?q=${keyword}` +
+    (fromDate ? `&from=${fromDate}` : '') +
+    (toDate ? `&to=${toDate}` : '') +
+    (category?.value ? `&category=${category?.value}` : '') +
+    '&country=us' +
+    (params?.author ? `&author=${params?.author}` : '') + 
+    `&apiKey=${NEWS_API_KEY}`;
+
     const response = await fetch(endpoint);
     const json = await response.json();
     return json.articles.map((article: any) => ({

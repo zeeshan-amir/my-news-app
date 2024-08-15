@@ -11,8 +11,10 @@ class GuardianApiService extends ApiService {
     const {keyword = 'debates'} = params;
     const endpoint = `/search?q=${keyword}${
       params?.category ? `&tag=${params.category.value}` : ''
-    }${params?.fromDate!=='' ? `&from-date=${params.fromDate}` : ''
+    }${params?.fromDate ? `&from-date=${params.fromDate}` : ''
+    }${params.author ? `&contributor=${params.author}` : ''
     }&api-key=${GUARDIAN_API_KEY}`;
+    
 
     const response = await this.get<{response: {results: any[]}}>(endpoint);
     return response.response.results.map((article: any) => ({

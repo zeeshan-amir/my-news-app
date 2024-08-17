@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import ArticleList from '../components/ArticleList';
 import SearchBar from '../components/SearchBar';
 import FilterPanel from '../components/FilterPanel';
@@ -40,6 +40,7 @@ const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1); // New state for current page
   const debouncedKeyword = useDebounce(search || '', 500);
   const {sourceToCategoriesMap} = useCategories();
+  const scrollableRef = useRef<HTMLDivElement>(null);
 
   const handleSearch = (keyword: string) => {
     setSearch(keyword);
@@ -50,9 +51,14 @@ const Home: React.FC = () => {
     setFilters(prevFilters => ({...prevFilters, ...filterParams}));
     setCurrentPage(1); 
   };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    if (scrollableRef.current) {
+      scrollableRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
 
   const isCategoryValidForSource = (source: string, category: string) => {
     const validCategories =
@@ -63,7 +69,6 @@ const Home: React.FC = () => {
   const fetchArticles = async () => {
     try {
       spinnerSvc.start();
-
       let guardianArticles: Article[] = [];
       let nyTimesArticles: Article[] = [];
       let newsAPIArticles: Article[] = [];
@@ -165,7 +170,7 @@ const Home: React.FC = () => {
   }, [debouncedKeyword]);
 
   return (
-    <div className="container mx-auto p-4 sm:p-8" >
+    <div className="container mx-auto p-4 sm:p-8" ref={scrollableRef}>
       <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
         Top Headlines
       </h1>

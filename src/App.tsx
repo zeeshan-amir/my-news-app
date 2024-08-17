@@ -31,6 +31,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/preferences" element={<Preferences />} />
+              <Route path="*" element={<div>PAGE NOT FOUND: 404</div>}/>
             </Routes>
           </main>
           <Footer />

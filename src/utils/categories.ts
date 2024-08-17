@@ -70,13 +70,6 @@ export const nyCategories = [
   'Your Money',
 ];
 
-export const newYorkselectOptions = nyCategories.map(category => {
-  return {
-    label: category,
-    value: category,
-  };
-});
-
 export const newsApiCategory: string[] = [
   'business',
   'entertainment',
@@ -85,10 +78,3 @@ export const newsApiCategory: string[] = [
   'sports',
   'technology',
 ];
-
-export const newsApiSelectOptions = newsApiCategory.map(x => {
-  return {
-    label: x,
-    value: x,
-  };
-});

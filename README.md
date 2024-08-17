@@ -57,7 +57,8 @@ Test cases react are added and ran before the build.
 ## Note
 
   - NewsApi is being used with fetch instead of axios due to some CORS policy issues.
-  - Pagination can be added for further improvements.
+  - APIs are not paid so there are some limitations like 'limited numbder of requests', 'Rate Limiting' etc. 
+  - You can add your own api-keys in env file in order to make it work as you expected.
 
 ## Conclusion
 

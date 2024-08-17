@@ -1,11 +1,11 @@
-import {ThreeDots} from 'react-loader-spinner';
+import React from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 
-const LoaderSpinner = () => {
+const LoaderSpinner: React.FC = () => {
   return (
     <>
-      <div style={styles?.overlay as object}></div>
-
-      <div style={styles?.loader as object}>
+      <div style={styles.overlay}></div>
+      <div style={styles.loader}>
         <ThreeDots color="#0EC4CB" height={100} width={100} />
       </div>
     </>
@@ -14,32 +14,22 @@ const LoaderSpinner = () => {
 
 export default LoaderSpinner;
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   loader: {
-    position: 'absolute',
-
+    position: 'fixed',
     top: '50%',
-
     left: '50%',
-
-    marginTop: '-50px',
-
-    marginLeft: '-50px',
-
+    transform: 'translate(-50%, -50%)', 
     zIndex: 999999,
   },
-
   overlay: {
-    background: '#000',
-
-    height: '100%',
-
-    opacity: 0.6,
-
+    background: 'rgba(0, 0, 0, 0.6)',
     position: 'fixed',
-
+    top: 0,
+    left: 0,
     width: '100%',
-
-    zIndex: 999998,
+    height: '100%',
+    zIndex: 999999999,
+    pointerEvents: 'auto',
   },
 };

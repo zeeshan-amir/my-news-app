@@ -14,6 +14,7 @@ export interface FetchArticlesParams {
   category?: Option;
   source?: Option[];
   author?: string;
+  page?: number;
 }
 
 export interface Option {

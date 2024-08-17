@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react';
 import {MultiValue, SingleValue} from 'react-select';
-import {newYorkselectOptions, newsApiSelectOptions} from '../utils/categories';
 import spinnerSvc from '../utils/loader-service';
 import GurdianApiService from '../services/GurdianApiService';
 import {Option} from '../types';
+import { newsApiSelectOptions, newYorkselectOptions } from '../utils/helpers';
 
 type SourceKey = 'The-News-Api' | 'New-York-Api' | 'Gurdian-Api';
 

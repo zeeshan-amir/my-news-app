@@ -7,24 +7,26 @@ class GuardianApiService extends ApiService {
     super('http://content.guardianapis.com');
   }
 
-  async fetchArticles(params: FetchArticlesParams = {}) {
-    const {keyword = 'debates'} = params;
-    const endpoint = `/search?q=${keyword}${
-      params?.category ? `&tag=${params.category.value}` : ''
-    }${params?.fromDate ? `&from-date=${params.fromDate}` : ''
-    }${params.author ? `&contributor=${params.author}` : ''
-    }&api-key=${GUARDIAN_API_KEY}`;
+  async fetchArticles(params: FetchArticlesParams) {
+    const {keyword = 'debates', page = 1} = params;
+    const endpoint = `/search?q=${keyword}` +
+      (params?.category ? `&tag=${params.category.value}` : '') +
+      (params?.fromDate ? `&from-date=${params.fromDate}` : '') +
+      (params.author ? `&contributor=${params.author}` : '') +
+      `&page=${page}` +
+      `&api-key=${GUARDIAN_API_KEY}`;
     
-
-    const response = await this.get<{response: {results: any[]}}>(endpoint);
-    return response.response.results.map((article: any) => ({
+    const response = await this.get<{response: {total:number ,results: any[]}}>(endpoint);
+    return {
+      totalRecordsGurdianApi: response?.response?.total/100,
+      recordsGurdianApi:response.response.results.map((article: any) => ({
       title: article.webTitle,
       description: article.webTitle,
       url: article.webUrl,
       imageUrl: '',
       source: 'The Guardian',
       publishedAt: article.webPublicationDate,
-    }));
+    }))}
   }
 
   async fetchGuardianTags() {

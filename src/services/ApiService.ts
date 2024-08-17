@@ -1,4 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import { toast } from 'react-toastify';
 
 type ResponseData<T> = Promise<T>;
 
@@ -28,7 +29,7 @@ class ApiService {
         if (error.response) {
           const status = error.response.status;
           const errorMessage = this.getErrorMessage(status);
-
+          toast.error(errorMessage)
           console.error(`HTTP Error ${status}: ${errorMessage}`);
           return Promise.reject(new Error(errorMessage));
         } else if (error.request) {
@@ -54,6 +55,8 @@ class ApiService {
         return 'Forbidden. You do not have permission to access this resource.';
       case 404:
         return 'Not Found. The requested resource could not be found.';
+      case 429:
+        return 'Too many request.';
       case 500:
         return 'Internal Server Error. Please try again later.';
       case 502:
